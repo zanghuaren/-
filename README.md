@@ -25,7 +25,7 @@ json样例：
 ```
 {
     "uid": "123456",
-    "JSESSIONID": "1234566",
+    "JSESSIONID": "654321",
     "SERVERID": "app6",
 }
 ```
@@ -46,4 +46,7 @@ pip install tabulate requests pandas wcwidth
 # 其他说明
 
 ID池是在操作当前文件夹下生成的ID.txt，你也可以手动编辑该文件。
+
+# 待完善功能
+输入账号密码，模拟登陆获取cookie。暂时缺乏相关能力，找不到请求的url和加密方式。
 
