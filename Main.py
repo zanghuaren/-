@@ -1,10 +1,10 @@
-from tabulate import tabulate
-import requests
-import json
-import pandas as pd
-import os
-import time
 import gxk_data
+import time
+import os
+import pandas as pd
+import json
+import requests
+from tabulate import tabulate
 
 
 with open("Cookie.json", "r", encoding="utf-8") as file:
@@ -39,7 +39,7 @@ data = {
 }
 
 
-def add_id(id):
+def Add_Id(id):
     # 文件路径
     file_path = "ID.txt"
 
@@ -84,9 +84,10 @@ def add_id(id):
     print("当前 ID 池：")
     for i in set(choose_list):  # 使用 set 去重
         print(i)
+# 添加ID到选课池
 
 
-def pre_load():
+def Pre_Load():
     params = {
         'jx0502zbid': '57CC78AC27EE439C98DE2A3121D0AE3D',
     }
@@ -98,9 +99,10 @@ def pre_load():
         verify=False,
     )
     response.close()
+# 预加载函数，即使cookie正确，也必须先访问这个url才能开始选课。
 
 
-def print_courses(courses):
+def Print_Course(courses):
     i = 0
     for course in courses:
         class_name = course.get('class_name', '未知课程')
@@ -115,7 +117,7 @@ def print_courses(courses):
 # 打印列表函数调试时使用，主要功能已废弃
 
 
-def ls_Courses(url):
+def Ls_Course(url):
     response = requests.post(
         url,
         cookies=cookies,
@@ -138,10 +140,10 @@ def ls_Courses(url):
                            'class_time': class_time, 'class_teacher': class_teacher})
 
     return courses
-# 适用于选修和必修
+# 课程列表，适用于选修和必修
 
 
-def find_course(file, *keywords):
+def Find_Course(file, *keywords):
     """
     根据用户输入的关键字筛选 CSV 文件中的数据。
 
@@ -171,10 +173,10 @@ def find_course(file, *keywords):
 # 查找公选课
 
 
-def BX_Courses(url1, url2):
-    course_list = ls_Courses(url1)
-    # print_courses(course_list)
-    len = print_courses(course_list)
+def BX_Course(url1, url2):
+    course_list = Ls_Course(url1)
+    # Print_Course(course_list)
+    len = Print_Course(course_list)
     print(f"当前课程共有{len}节课可选————")
     for i in range(0, len):
         class_teacher = course_list[i]['class_teacher']
@@ -203,10 +205,10 @@ def BX_Courses(url1, url2):
 # 必修程选择
 
 
-def XX_Courses(url1, url2):
-    course_list = ls_Courses(url1)
+def XX_Course(url1, url2):
+    course_list = Ls_Course(url1)
     len_courses = len(course_list)  # 获取课程数量
-    print_courses(course_list)
+    Print_Course(course_list)
     print(f"当前课程共有{len_courses}节课可选————")
 
     # 创建一个字典，映射序号到课程信息
@@ -248,9 +250,10 @@ def XX_Courses(url1, url2):
                 print(f"选课失败！{resp.json()['message']}")
         else:
             print(f"无效的序号：{index}")
+# 选修课选课
 
 
-def Public_Courses(url, id):
+def Public_Course(url, id):
     params = {
         'jx0404id': id,
         'xkzy': '',
@@ -274,26 +277,55 @@ def Public_Courses(url, id):
 # 公选课选择
 
 
+def Cancel_Course(url, id):
+    params = {
+        'jx0404id': id,
+    }
+
+    resp = requests.get(
+        url,
+        params=params,
+        cookies=cookies,
+        headers=headers,
+        verify=False,
+    )
+    resp.close()
+    if resp.json()['success']:
+        print('退课成功！')
+        return True
+    else:
+        # print(resp.json()['message'])
+        # 如果没选上面会打印非本学期课程表不能退选，实际上是没有选择。
+        print('该课程还未选择！')
+        return False
+    print('----------------------------------')
+
+
 def main():
-    pre_load()
+    Pre_Load()
+
     # 分别为：必修选课请求网页，选修选课请求网页，选择公选课操作的请求地址。选择选修和必修操作的请求地址。
     url1 = 'http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxkkc/xsxkBxxk'
     url2 = 'http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxkkc/xsxkXxxk'
     url3 = 'http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxkkc/ggxxkxkOper'
     url4 = 'http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxkkc/bxxkOper'
+    url5 = 'http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxkjg/xstkOper'
     while (True):
         print("=============================")
-        print("输入1进入必修选课")
-        print("输入2进入选修选课")
-        print("输入3进入循环选课模式")
-        print("输入4查找或选择公共选修课")
-        print("输入5加载选修课数据")
+        print(" 输入1进入必修选课")
+        print(" 输入2进入选修选课")
+        print(" 输入3进入循环选课模式")
+        print(" 输入4查找或选择公共选修课")
+        print(" 输入5加载选修课数据")
+        print(" 输入6进入退课模式")
         print("=============================")
         i = input("Please Enter:")
+        if int(i) == 0:
+            break
         try:
             if int(i) == 1:
                 os.system('cls')
-                BX_Courses(url1, url4)
+                BX_Course(url1, url4)
                 print("所有必修课选择成功！")
                 os.system('pause')
                 os.system('cls')
@@ -301,7 +333,7 @@ def main():
                 os.system('cls')
             if int(i) == 2:
                 os.system('cls')
-                XX_Courses(url2, url4)
+                XX_Course(url2, url4)
                 os.system('pause')
                 os.system('cls')
             else:
@@ -315,7 +347,7 @@ def main():
                     print("输入1设置选课池")
                     print("输入2在选课池中开始选课")
                     print("=============================")
-                    words = input("请输入")
+                    words = input("请输入：")
                     if words == '0':
                         break
                     if words == '1':
@@ -326,7 +358,7 @@ def main():
                             id = input("Please Enter Course ID:")
                             if id == '0':
                                 break
-                            add_id(id)
+                            Add_Id(id)
                     if words == '2':
                         sum = 0
                         while (True):
@@ -337,14 +369,14 @@ def main():
                             print(f"\n第{sum}次尝试：")
                             for id in ids:
                                 print(id)
-                                if Public_Courses(url3, id):
+                                if Public_Course(url3, id):
                                     break
-                            time.sleep(1)
+                            time.sleep(1.5)
             else:
                 os.system('cls')
             if int(i) == 4:
                 os.system('cls')
-                print("输入课程名称则搜索，输入课程ID则选课，输入0退出——")
+                print("输入课程名称则搜索，输入课程ID则选课，输入0退出。")
                 print("说明：例如最后一列3/30表示课程容量30人，已选3人。搜索支持星期几、老师、课程类型等。")
                 while (True):
                     words = input("\n请输入：").replace('，', ',')
@@ -352,14 +384,12 @@ def main():
                         break
                     elif len(words) == 15:
                         os.system('cls')
-                        Public_Courses(url3, words)
-                        # print("\n公选课选择成功！")
+                        Public_Course(url3, words)
                         os.system('pause')
                     else:
                         words = words.split(",")
-                        results = find_course("data.csv", *words)
+                        results = Find_Course("data.csv", *words)
                         print(results)
-                        # os.system('cls')
             else:
                 os.system('cls')
             if int(i) == 5:
@@ -368,10 +398,17 @@ def main():
                 print("提取完成！")
             else:
                 os.system('cls')
+            if int(i) == 6:
+                words = input("请输入退课ID：")
+                Cancel_Course(url5, words)
+                os.system('pause')
+                os.system('cls')
+            else:
+                os.system('cls')
         except:
             os.system('cls')
             # cookie有效期内的第一次使用必须访问下面的地址。
-            pre_load()
+            # Pre_Load()
 
 
 if __name__ == '__main__':
