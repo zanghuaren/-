@@ -18,9 +18,11 @@
 
 ## 使用说明
 
-选课前登陆学校的[教学一体化平台](http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxk/xklc_list),浏览器抓包获得自己的cookie。也可以右键复制curl然后到[这个](https://curlconverter.com/)网站转换后一键复制。然后把复制的cookie保存到cookie.json。注意复制的是单引号要改为双引号。
-
-json样例：
+选课前登陆学校的[教学一体化平台](http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxk/xklc_list),F12刷新页面浏览器抓包，
+![image](https://github.com/user-attachments/assets/c6280001-88d2-4d5f-b736-20048ca23a55)
+然后去[https://curlconverter.com/](https://curlconverter.com/)粘贴转换为python用的格式，找到cookie，把cookie后面的大括号内容复制保存到cookie.json。
+注意复制的是单引号要改为双引号。
+最终json样例：
 
 ```
 {
@@ -46,6 +48,14 @@ pip install tabulate requests pandas wcwidth
 ## 其他说明
 
 ID池是在操作当前文件夹下生成的ID.txt，你也可以手动编辑该文件。
+
+## 主要功能运行截图
+<img width="1045" alt="Snipaste_2025-01-06_11-11-15" src="https://github.com/user-attachments/assets/002739c7-9695-41ea-826b-ea3b62f61b93" />
+<img width="813" alt="Snipaste_2025-01-06_11-09-13" src="https://github.com/user-attachments/assets/4c275587-5781-4ec7-9db5-888f32a8e972" />
+<img width="813" alt="Snipaste_2025-01-06_11-10-11" src="https://github.com/user-attachments/assets/be0e85ec-eed8-4e76-bb1f-c3ad47b0d0ce" />
+<img width="807" alt="Snipaste_2025-01-06_11-28-51" src="https://github.com/user-attachments/assets/ca668c57-eba5-40f0-afd8-a93d7dec219c" />
+
+
 
 ## 待完善功能
 输入账号密码，模拟登陆获取cookie。暂时缺乏相关能力，找不到请求的url和加密方式。
