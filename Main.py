@@ -72,6 +72,8 @@ def Add_Id(id):
 
         else:
             print("ID 格式错误：必须以 '+' 或 '-' 开头！")
+    elif id == '':
+        pass
     else:
         print("ID 无效：长度必须为 16 位！")
 
@@ -304,7 +306,7 @@ def Cancel_Course(url, id):
 def main():
     Pre_Load()
 
-    # 分别为：必修选课请求网页，选修选课请求网页，选择公选课操作的请求地址。选择选修和必修操作的请求地址。退课请求地址。
+    # 分别为：必修选课请求网页，选修选课请求网页，选择公选课操作的请求地址。选择选修和必修操作请求地址，退课操作地址。
     url1 = 'http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxkkc/xsxkBxxk'
     url2 = 'http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxkkc/xsxkXxxk'
     url3 = 'http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxkkc/ggxxkxkOper'
@@ -351,8 +353,8 @@ def main():
                     if words == '0':
                         break
                     if words == '1':
-                        print("说明：如输入+ID标明添加，-ID表明移除：")
-                        print("输入0退出")
+                        print("说明：如输入+ID标明添加，-ID表明移除，输入0退出.")
+                        Add_Id("")
                         while (True):
                             # 获取用户输入的 ID
                             id = input("Please Enter Course ID:")
@@ -407,9 +409,6 @@ def main():
                 os.system('cls')
         except:
             os.system('cls')
-            # cookie有效期内的第一次使用必须访问下面的地址。
-            # Pre_Load()
-
-
+            
 if __name__ == '__main__':
     main()
