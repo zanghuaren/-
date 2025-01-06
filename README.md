@@ -7,7 +7,7 @@
 之前在GitHub搜索大外的选课脚本没有找到，于是决定让大外出现在GitHub上。
 
 ## 更新日志
-- 2025/01/06 增加了退课功能
+- 2025/01/06 增加了退课功能，规范了函数命名。
 
 ## 主要功能
 
@@ -50,7 +50,7 @@ pip install tabulate requests pandas wcwidth
 
 ## 其他说明
 
-ID池是在操作当前文件夹下生成的ID.txt，你也可以手动编辑该文件。
+默认0退出当前菜单。ID池保存在ID.txt，你也可以手动编辑该文件。
 
 ## 主要功能运行截图
 <img width="1045" alt="Snipaste_2025-01-06_11-11-15" src="https://github.com/user-attachments/assets/002739c7-9695-41ea-826b-ea3b62f61b93" />
