@@ -51,6 +51,7 @@ pip install tabulate requests pandas wcwidth
 ## 其他说明
 
 默认0退出当前菜单。ID池保存在ID.txt，你也可以手动编辑该文件。
+为减轻服务器压力，搜索功能必须先使用功能菜单"5"把数据下载到本地，因此课程选择人数是下载时的情况而非实时。
 
 ## 主要功能运行截图
 <img width="1045" alt="Snipaste_2025-01-06_11-11-15" src="https://github.com/user-attachments/assets/002739c7-9695-41ea-826b-ea3b62f61b93" />
