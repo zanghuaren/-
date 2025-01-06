@@ -15,13 +15,12 @@
 - 选修选课，列出当前课程，输入序号选择。
 - 公选课查找，查找符合条件的公选课，支持输入多个关键词。
 - 公选课选课，在查找页面直接输入课程ID就可以选择。
-- 循环选课，提前把想选的课程添加到选课池，运行后会不断尝试选课，直到有一门课程被选中为止。适用于体育课。
-
+- 循环选课，提前把想选的课程添加到选课池，运行后会不断尝试选课，直到有一门课程被选中为止。适用于体育课。在学校开放选课前拉不到数据，因此添加了默认的课程数据，可以提前搜索添加自己感兴趣的体育课到选课池。
 
 
 ## 使用说明
 
-选课前登陆学校的[教学一体化平台](http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxk/xklc_list),F12刷新页面浏览器抓包，
+选课前登陆学校的[教学一体化平台](http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxk/xklc_list),F12打开开发者工具然后刷新页面抓包，
 ![image](https://github.com/user-attachments/assets/c6280001-88d2-4d5f-b736-20048ca23a55)
 然后去[https://curlconverter.com/](https://curlconverter.com/)粘贴转换为python用的格式，找到cookie，把cookie后面的大括号内容复制保存到cookie.json。
 注意复制的是单引号要改为双引号。
@@ -51,7 +50,7 @@ pip install tabulate requests pandas wcwidth
 ## 其他说明
 
 默认0退出当前菜单。ID池保存在ID.txt，你也可以手动编辑该文件。
-为减轻服务器压力，搜索功能必须先使用功能菜单"5"把数据下载到本地，因此课程选择人数是下载时的情况而非实时。
+为减轻服务器压力，搜索功能须先使用功能菜单"5"更新数据，因此课程选择人数是下载时的情况而非实时。
 
 ## 主要功能运行截图
 <img width="1045" alt="Snipaste_2025-01-06_11-11-15" src="https://github.com/user-attachments/assets/002739c7-9695-41ea-826b-ea3b62f61b93" />
