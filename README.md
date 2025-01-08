@@ -23,14 +23,14 @@
 选课前登陆学校的[教学一体化平台](http://jwgl.jiaowu.dlufl.edu.cn/jxjsxsd/xsxk/xklc_list),F12打开开发者工具然后刷新页面抓包，找到一个含有cookie的请求右键复制curl(如果不知道哪个就参考图中这个)，
 ![image](https://github.com/user-attachments/assets/c6280001-88d2-4d5f-b736-20048ca23a55)
 然后去[https://curlconverter.com/](https://curlconverter.com/)粘贴转换为python用的格式，找到cookie，把cookie后面的大括号内容复制保存到cookie.json。
-注意复制的是单引号要改为双引号。
+注意复制的是单引号要改为双引号，不要加尾行逗号。
 最终json样例：
 
 ```
 {
     "uid": "123456",
     "JSESSIONID": "654321",
-    "SERVERID": "app6",
+    "SERVERID": "app6"
 }
 ```
 
